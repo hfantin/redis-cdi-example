@@ -1,5 +1,8 @@
 package com.github.hfantin.redisexample.dto;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonRootName("catalogos")
 public class Bundle {
 
 
