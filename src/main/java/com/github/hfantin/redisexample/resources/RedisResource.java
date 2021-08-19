@@ -8,6 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Map;
+import java.util.Set;
 
 @Path("/redis")
 public class RedisResource {
@@ -30,6 +31,14 @@ public class RedisResource {
     public Response put(@PathParam("key") String key, String value) {
         jedisPool.set(key, value);
         return Response.ok(Map.of(key, value)).build();
+    }
+
+    @GET
+    @Path("/keys/{key}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listKeys(@PathParam("key") String key) {
+        Set<String> value = jedisPool.keys(key);
+        return Response.ok(value).build();
     }
 
 }

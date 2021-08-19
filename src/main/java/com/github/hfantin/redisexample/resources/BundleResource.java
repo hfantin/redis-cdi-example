@@ -34,9 +34,10 @@ public class BundleResource {
     @POST
     @Path("/{os}/{version}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putBundle(@PathParam("os") String os, @PathParam("version") final String version, final Bundle bundle) {
+    public Response postBundle(@PathParam("os") String os, @PathParam("version") final String version, final Bundle bundle) {
         String value  = new Gson().toJson(bundle);
         String key = getKey(os, version);
+        System.out.println("postBundle: " + os + ", " + version + ", " + bundle);
         jedisPool.set(key, value);
         return Response.ok(key).build();
     }
